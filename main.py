@@ -52,3 +52,5 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     await interaction.response.send_message(f"You’ve been given `{marks}` flair! Now take lite", ephemeral=True)
 
 bot.run(TOKEN)
+
+#yeah ok i think im done
