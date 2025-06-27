@@ -33,24 +33,21 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     guild = interaction.guild
     member = interaction.user
 
-    # making role
-    role = discord.utils.get(guild.roles, name=role_name)
-    if not role:
-        try:
-            role = await guild.create_role(name=role_name)
-        except discord.Forbidden:
-            await interaction.response.send_message("permission insufficient", ephemeral=True)
-            return
+    #adding marks to side and stuff
+    current_nick = member.nick if member.nick else member.name
+    if current_nick[0] == "[" and "]" in current_nick[1:5]:
+        current_nick = current_nick[current_nick.index("]")+1:]
 
-    # in case you already got marks assigned
-    for r in member.roles:
-        if r.name.isdigit() and 0 <= int(r.name) <= 390:
-            await member.remove_roles(r) # get unmarked
+    new_nick = f"[{marks}] {current_nick}"
+    try:
+        await member.edit(nick=new_nick)
+    except discord.Forbidden:
+        await interaction.response.send_message("I don't have permission to change your nickname.", ephemeral=True)
+        return
 
-    # Assign the new role
-    await member.add_roles(role)
-    await interaction.response.send_message(f"You’ve been given `{marks}` flair! Now take lite", ephemeral=True)
-
+    await interaction.response.send_message(
+        f"✅ Role `{marks}` assigned and nickname updated to `{new_nick}`! Now take lite :)", ephemeral=True
+    )
 bot.run(TOKEN)
 
-#yeah ok i think im done
+#well i hope it works now
