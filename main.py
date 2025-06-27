@@ -39,6 +39,10 @@ async def set_marks(interaction: discord.Interaction, marks: int):
         current_nick = current_nick[current_nick.index("]")+1:]
 
     new_nick = f"[{marks}] {current_nick}"
+    if len(new_nick) > 32:  #name too long
+        await interaction.response.send_message("Bhai tera naam bhot lamba hai, chota kr de", ephemeral=True)
+        return
+
     try:
         await member.edit(nick=new_nick)
     except discord.Forbidden:
