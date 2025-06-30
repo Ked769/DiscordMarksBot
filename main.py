@@ -39,7 +39,7 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     if current_nick[0] == "[" and "]" in current_nick[1:5]:
         current_nick = current_nick[current_nick.index("]")+1:]
 
-    new_nick = f"[{marks}] {current_nick}"
+    new_nick = f"[{marks}]{current_nick}"
     if len(new_nick) > 32:  #name too long
         await interaction.response.send_message("Bhai tera naam bhot lamba hai, chota kr de 😅", ephemeral=True)
         return
