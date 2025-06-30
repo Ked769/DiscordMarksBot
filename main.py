@@ -51,7 +51,7 @@ async def set_marks(interaction: discord.Interaction, marks: int):
         return
 
     await interaction.response.send_message(
-        f"✅ Role `{marks}` assigned and nickname updated to `{new_nick}`! Now take lite :)", ephemeral=True
+        f"✅ Nickname updated to `{new_nick}`! Now take lite :)", ephemeral=True
     )
 bot.run(TOKEN)
 
