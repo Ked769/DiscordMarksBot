@@ -27,7 +27,7 @@ async def on_ready():
 @app_commands.describe(marks="Your BITSAT score (0–390)")
 async def set_marks(interaction: discord.Interaction, marks: int):
     if marks < 0 or marks > 390:
-        await interaction.response.send_message("Stop lying, chutiye", ephemeral=True)
+        await interaction.response.send_message("Stop lying, chutiye 🤬", ephemeral=True)
         return
 
     role_name = str(marks)
@@ -41,13 +41,13 @@ async def set_marks(interaction: discord.Interaction, marks: int):
 
     new_nick = f"[{marks}] {current_nick}"
     if len(new_nick) > 32:  #name too long
-        await interaction.response.send_message("Bhai tera naam bhot lamba hai, chota kr de", ephemeral=True)
+        await interaction.response.send_message("Bhai tera naam bhot lamba hai, chota kr de 😅", ephemeral=True)
         return
 
     try:
         await member.edit(nick=new_nick)
     except discord.Forbidden:
-        await interaction.response.send_message("I don't have permission to change your nickname.", ephemeral=True)
+        await interaction.response.send_message("I don't have permission to change your nickname 😕 contact ked769#9886", ephemeral=True)
         return
 
     await interaction.response.send_message(
