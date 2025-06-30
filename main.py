@@ -34,8 +34,6 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     guild = interaction.guild
     member = interaction.user
 
-    marks = marks.rstrip()
-
     #adding marks to side and stuff
     current_nick = member.nick if member.nick else member.name
     if current_nick[0] == "[" and "]" in current_nick[1:5]:
@@ -45,7 +43,7 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     if len(new_nick) > 32:  #name too long
         await interaction.response.send_message("Bhai tera naam bhot lamba hai, chota kr de 😅", ephemeral=True)
         return
-
+    
     try:
         await member.edit(nick=new_nick)
     except discord.Forbidden:
