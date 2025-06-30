@@ -1,9 +1,10 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+import os
 
-TOKEN = open("token.txt").read()
-GUILD_ID = int(open("guildID.txt").read())
+TOKEN = os.environ["token"]
+GUILD_ID = os.environ["guild_id"]
 
 intents = discord.Intents.default()
 intents.members = True
