@@ -51,8 +51,8 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     if member.name not in users:
         # Save to users.txt
         with open("users.txt", "w") as f:
-            for member in users:
-                f.write(f"{member.name} {current_nick}\n")
+            for mem in users:
+                f.write(f"{mem} {users[mem]}\n")
         users[member.name] = current_nick
         print(f"added {member.nick} to users.txt")
         print(open("users.txt").read())
