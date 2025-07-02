@@ -46,11 +46,22 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     guild = interaction.guild
     member = interaction.user
 
+    # Save original nickname to users.txt if this is their first time using setmarks
+    current_nick = member.nick if member.nick else member.name
+    if member.name not in users:
+        # Save to users.txt
+        with open("users.txt", "w") as f:
+            for member in users:
+                f.write(f"{member.name} {current_nick}\n")
+        users[member.name] = current_nick
+        print(f"added {member.nick} to users.txt")
+        print(open("users.txt").read())
+
     if member.name in users and member.nick != users[member.name]:
         users[member.name] = member.nick
         with open("users.txt", "w") as f:
             for member in users:
-                f.write(f"{member.name} {current_nick}\n")
+                f.write(f"{member.name} {member.nick}\n")
         print(f"added {member.nick} to users.txt")
 
     if member.name in d:
@@ -62,17 +73,6 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     elif member.name == "floatingreeds":
         await interaction.response.send_message("sorry, I don't think you'd like any nickname I give you.", ephemeral=True)
         return
-
-    # Save original nickname to users.txt if this is their first time using setmarks
-    current_nick = member.nick if member.nick else member.name
-    if member.name not in users:
-        # Save to users.txt
-        with open("users.txt", "w") as f:
-            for member in users:
-                f.write(f"{member.name} {current_nick}\n")
-        users[member.name] = current_nick
-        print(f"added {member.nick} to users.txt")
-        print(open("users.txt").read())
 
     #adding marks to side and stuff
     if current_nick[0] == "[" and "]" in current_nick[1:5]:
