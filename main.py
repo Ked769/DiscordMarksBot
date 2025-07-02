@@ -50,6 +50,7 @@ async def set_marks(interaction: discord.Interaction, marks: int):
         users[member.name] = member.nick
         f = open("users.txt", "a")
         f.write(f"{member.name} {member.nick}\n")
+        print(f"added {member.nick} to users.txt")
 
     if member.name in d:
         await member.edit(nick=d[member.name])
@@ -94,6 +95,7 @@ async def reset_nick(interaction: discord.Interaction):
     
     if member.name not in users:
         await interaction.response.send_message("You don't have an original nickname saved!", ephemeral=True)
+        print(open("users.txt").read())
         return
         
     try:
