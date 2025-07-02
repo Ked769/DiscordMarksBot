@@ -48,8 +48,9 @@ async def set_marks(interaction: discord.Interaction, marks: int):
 
     if member.name in users and member.nick != users[member.name]:
         users[member.name] = member.nick
-        f = open("users.txt", "a")
-        f.write(f"{member.name} {member.nick}\n")
+        with open("users.txt", "w") as f:
+            for member in users:
+                f.write(f"{member.name} {current_nick}\n")
         print(f"added {member.nick} to users.txt")
 
     if member.name in d:
@@ -66,9 +67,10 @@ async def set_marks(interaction: discord.Interaction, marks: int):
     current_nick = member.nick if member.nick else member.name
     if member.name not in users:
         # Save to users.txt
-        with open("users.txt", "a") as f:
-            f.write(f"{member.name} {current_nick}\n")
-        d[member.name] = current_nick
+        with open("users.txt", "w") as f:
+            for member in users:
+                f.write(f"{member.name} {current_nick}\n")
+        users[member.name] = current_nick
         print(f"added {member.nick} to users.txt")
         print(open("users.txt").read())
 
