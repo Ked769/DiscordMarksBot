@@ -69,6 +69,8 @@ async def set_marks(interaction: discord.Interaction, marks: int):
         with open("users.txt", "a") as f:
             f.write(f"{member.name} {current_nick}\n")
         d[member.name] = current_nick
+        print(f"added {member.nick} to users.txt")
+        print(open("users.txt").read())
 
     #adding marks to side and stuff
     if current_nick[0] == "[" and "]" in current_nick[1:5]:
